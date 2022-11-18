@@ -1,0 +1,25 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}">
+
+
+<nav  class="nav">
+	<div class="container">
+		<a href="{% url 'store' %}" class="active"><i class="fa fa-home"></i>Monroe</a>
+        <a href="{% url 'checkout' %}"><i class="fa fa-file"></i>Checkout</a>
+		<ul>
+
+			<li><a style="padding:0; margin:0;"  href="{% url 'cart' %}"><div>{{cartItems}}
+				<img src="{% static 'images/cart-5.png' %}"></div>
+			</a></li>
+			<li><a href="{% url 'add_product' %}">AddProduct</a></li>
+            {% if request.user.is_authenticated %}
+			<li><div style="color: white;">Hello {{ request.user.username }} |</div></li>
+			<li><a href="{% url 'logout'%}">Logout</a></li>
+            {% else %}
+			<li><a href="{% url 'register' %}">Registration</a> </li>
+			<li><a href="{% url 'login' %}">Login</a></li>
+			{% endif%}
+		</ul>
+	</div>
+</nav >
+

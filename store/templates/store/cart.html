@@ -1,0 +1,58 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block title %}CART{% endblock title%}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
+
+<div>
+    <div class="cart-items">
+        <div class="first-item">
+            <a class="continue-shopping"
+               href="{% url 'store'%}">&#x2190; Continue
+                Shopping</a>
+            <br>
+            <br>
+            <hr>
+            <div class="total-version" >
+                <div class="total-items" >
+                    <h2>Items: {{ order.get_cart_items }}</h2>
+                    <h2>Total: ${{ order.get_cart_total|floatformat:2  }}</h2>
+                </div>
+                <button class="btn-checkout" ><a href="{% url 'checkout' %}"><h2>Checkout</h2> </a></button>
+            </div>
+        </div>
+    </div>
+     <div  class="full-table">
+        <table class="table-items">
+            <tr>
+                <th></th>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td ><img style="width:200px; height:100px;" class="product-image"
+                         src="{{ item.product.imageURL }}"></td>
+                <td>{{ item.product.name }}</td>
+                <td>${{ item.product.price|floatformat:2 }}</td>
+                <td>
+                    <div class="amountbar">
+                        <div class="one">{{ item.quantity }}</div>
+                        <div class="arrow-images">
+                            <img data-product={{ item.product.id }} data-action="add" class="update-cart"
+                                 src="{% static 'images/arrow-down.png'%}">
+                            <img data-product={{ item.product.id }} data-action="remove" class="update-cart"
+                                 src="{% static 'images/arrow-down.png'%}">
+                        </div>
+                    </div>
+                </td>
+                <td>${{ item.get_total }}</td>
+            </tr>
+            {% endfor%}
+        </table>
+     </div>
+</div>
+{% endblock content%}

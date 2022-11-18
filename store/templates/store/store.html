@@ -1,0 +1,30 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block title %}STORE{% endblock title%}
+
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/store.css' %}">
+<div class="content-center">
+<div class="content" >
+    {% for product in products %}
+    <div class="shop-product">
+        <img class="product-image" src="{{ product.imageURL }}">
+        <h1 style="margin-left:10px;"><strong>{{ product.name }}</strong></h1>
+        <hr>
+        <div class="add-to-cart">
+            <div class="atd-view">
+            <button data-product="{{product.id}}" data-action="add" class="btn-add-to-cart update-cart" >Add to
+                cart</button>
+            <a class="view">View</a>
+            </div>
+            <h2 style="float:right;">${{ product.price|floatformat:2 }}</h2>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+{% endblock content %}
+
