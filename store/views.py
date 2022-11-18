@@ -129,3 +129,5 @@ def processOrder(request):
             zipcode=data['shipping']['zipcode'],
         )
     return JsonResponse('Payment completed', safe=False)
+
+#1011
